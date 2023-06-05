@@ -1,8 +1,11 @@
 package com.aytac.quickcommerceapi.service;
 
-import com.aytac.quickcommerceapi.dto.converter.CategoryResponseDtoConverter;
+import com.aytac.quickcommerceapi.dto.MetaDto;
+import com.aytac.quickcommerceapi.dto.converter.CategoryResponseConverter;
+import com.aytac.quickcommerceapi.dto.converter.MetaDtoConverter;
 import com.aytac.quickcommerceapi.dto.request.CategoryUpdateRequest;
-import com.aytac.quickcommerceapi.dto.response.CategoryResponseDto;
+import com.aytac.quickcommerceapi.dto.PaginatedDataDto;
+import com.aytac.quickcommerceapi.dto.response.CategoryResponse;
 import com.aytac.quickcommerceapi.model.Category;
 import com.aytac.quickcommerceapi.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
@@ -11,27 +14,37 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final CategoryResponseDtoConverter converter;
+    private final CategoryResponseConverter converter;
+    private final MetaDtoConverter metaConverter;
 
     public CategoryService(CategoryRepository categoryRepository,
-                           CategoryResponseDtoConverter converter) {
+                           CategoryResponseConverter converter,
+                            MetaDtoConverter metaConverter) {
         this.categoryRepository = categoryRepository;
         this.converter = converter;
+        this.metaConverter = metaConverter;
     }
 
-    public Page<CategoryResponseDto> getAllCategories(int page, int size) {
+    public PaginatedDataDto<CategoryResponse> getAllCategories(int page, int size) {
+
         Pageable pageable = PageRequest.of(page, size);
         Page<Category> categories = categoryRepository.findAll(pageable);
 
-        return categories.map(converter::convert);
+        MetaDto metaDto = metaConverter.convert(categories);
+
+       // return categories.map(converter::convert);
+        return new PaginatedDataDto<CategoryResponse>(
+                (categories.getContent().stream().map(converter::convert)).collect(Collectors.toList()),
+                metaDto);
     }
 
-    public CategoryResponseDto getCategoryById(Long id) {
+    public CategoryResponse getCategoryById(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
 
         return category.map(converter::convert).orElse(null);
@@ -52,7 +65,7 @@ public class CategoryService {
         return false;
     }
 
-    public CategoryResponseDto updateCategoryById(CategoryUpdateRequest request, Long id) {
+    public CategoryResponse updateCategoryById(CategoryUpdateRequest request, Long id) {
         Optional<Category> category = categoryRepository.findById(id);
 
         if (category.isPresent()) {
