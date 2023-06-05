@@ -3,6 +3,7 @@ package com.aytac.quickcommerceapi.service;
 import com.aytac.quickcommerceapi.dto.MetaDto;
 import com.aytac.quickcommerceapi.dto.converter.CategoryResponseConverter;
 import com.aytac.quickcommerceapi.dto.converter.MetaDtoConverter;
+import com.aytac.quickcommerceapi.dto.request.CategoryCreateRequest;
 import com.aytac.quickcommerceapi.dto.request.CategoryUpdateRequest;
 import com.aytac.quickcommerceapi.dto.PaginatedDataDto;
 import com.aytac.quickcommerceapi.dto.response.CategoryResponse;
@@ -25,7 +26,7 @@ public class CategoryService {
 
     public CategoryService(CategoryRepository categoryRepository,
                            CategoryResponseConverter converter,
-                            MetaDtoConverter metaConverter) {
+                           MetaDtoConverter metaConverter) {
         this.categoryRepository = categoryRepository;
         this.converter = converter;
         this.metaConverter = metaConverter;
@@ -38,7 +39,6 @@ public class CategoryService {
 
         MetaDto metaDto = metaConverter.convert(categories);
 
-       // return categories.map(converter::convert);
         return new PaginatedDataDto<CategoryResponse>(
                 (categories.getContent().stream().map(converter::convert)).collect(Collectors.toList()),
                 metaDto);
@@ -50,11 +50,12 @@ public class CategoryService {
         return category.map(converter::convert).orElse(null);
     }
 
-    public void createCategory(String title, String image) {
+    public CategoryResponse createCategory(CategoryCreateRequest request) {
         Category category = new Category();
-        category.setTitle(title);
-        category.setImage(image);
-        categoryRepository.save(category);
+        category.setTitle(request.title());
+        category.setImage(request.image());
+
+        return converter.convert(categoryRepository.save(category));
     }
 
     public boolean deleteCategoryById(Long id) {
