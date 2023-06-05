@@ -1,4 +1,4 @@
-package com.aytac.quickcommerceapi.dto;
+package com.aytac.quickcommerceapi.dto.response;
 
 public record ApiResponse<T>(
         boolean isSuccessful,

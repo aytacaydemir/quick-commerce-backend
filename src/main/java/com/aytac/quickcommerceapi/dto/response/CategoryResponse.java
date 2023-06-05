@@ -1,6 +1,6 @@
 package com.aytac.quickcommerceapi.dto.response;
 
-public record CategoryResponseDto(
+public record CategoryResponse(
         Long id,
         String title,
         String image

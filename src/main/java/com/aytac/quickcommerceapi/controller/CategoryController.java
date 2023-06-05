@@ -1,10 +1,10 @@
 package com.aytac.quickcommerceapi.controller;
 
-import com.aytac.quickcommerceapi.dto.ApiResponse;
+import com.aytac.quickcommerceapi.dto.PaginatedDataDto;
+import com.aytac.quickcommerceapi.dto.response.ApiResponse;
 import com.aytac.quickcommerceapi.dto.request.CategoryUpdateRequest;
-import com.aytac.quickcommerceapi.dto.response.CategoryResponseDto;
+import com.aytac.quickcommerceapi.dto.response.CategoryResponse;
 import com.aytac.quickcommerceapi.service.CategoryService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,16 +20,18 @@ public class CategoryController {
     }
 
     @GetMapping(value = {"", "/"})
-    public ResponseEntity<ApiResponse<Page<CategoryResponseDto>>> getAllCategories(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
-        Page<CategoryResponseDto> categories = categoryService.getAllCategories(page, size);
+    public ResponseEntity<ApiResponse<PaginatedDataDto<CategoryResponse>>> getAllCategories
+            (@RequestParam(defaultValue = "0") int page,
+             @RequestParam(defaultValue = "5") int size) {
+        PaginatedDataDto<CategoryResponse> categories = categoryService.getAllCategories(page, size);
 
         return new ResponseEntity<>(new ApiResponse<>(true, categories, null), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<CategoryResponseDto>> getCategoryById(@PathVariable(required = false) Long id) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById(@PathVariable(required = false) Long id) {
 
-        CategoryResponseDto categoryResponseDto = categoryService.getCategoryById(id);
+        CategoryResponse categoryResponseDto = categoryService.getCategoryById(id);
         if (categoryResponseDto != null) {
             return new ResponseEntity<>(new ApiResponse<>(true, categoryResponseDto, null), HttpStatus.OK);
         }
@@ -50,9 +52,9 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<CategoryResponseDto>> updateCategoryById(@RequestBody CategoryUpdateRequest request, @PathVariable Long id) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategoryById(@RequestBody CategoryUpdateRequest request, @PathVariable Long id) {
 
-        CategoryResponseDto dto = categoryService.updateCategoryById(request, id);
+        CategoryResponse dto = categoryService.updateCategoryById(request, id);
 
         if (dto != null) {
             return new ResponseEntity<>(new ApiResponse<>(true, dto, null), HttpStatus.CREATED);
