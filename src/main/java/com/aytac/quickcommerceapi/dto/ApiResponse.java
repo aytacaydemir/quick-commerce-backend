@@ -5,9 +5,4 @@ public record ApiResponse<T>(
         T data,
         String errorCode
 ) {
-    public ApiResponse(boolean isSuccessful, T data, String errorCode) {
-        this.isSuccessful = isSuccessful;
-        this.data = data;
-        this.errorCode = errorCode;
-    }
 }
