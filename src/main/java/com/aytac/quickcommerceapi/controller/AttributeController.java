@@ -1,12 +1,10 @@
 package com.aytac.quickcommerceapi.controller;
 
-import com.aytac.quickcommerceapi.dto.PaginatedDataDto;
 import com.aytac.quickcommerceapi.dto.request.AttributeCreateRequest;
 import com.aytac.quickcommerceapi.dto.response.ApiResponse;
 import com.aytac.quickcommerceapi.model.Attribute;
 import com.aytac.quickcommerceapi.service.AttributeService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,7 @@ public class AttributeController {
     }
 
 
-    @GetMapping //retrieve a list of all attributes
+    @GetMapping
     @Operation(summary = "Get All Attributes",
             description = "Retrieves a list of all attributes")
     public ResponseEntity<ApiResponse<List<Attribute>>> getAllAttributes() {
