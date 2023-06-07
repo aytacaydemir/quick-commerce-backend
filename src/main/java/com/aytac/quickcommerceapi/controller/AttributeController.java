@@ -1,6 +1,7 @@
 package com.aytac.quickcommerceapi.controller;
 
 import com.aytac.quickcommerceapi.dto.request.AttributeCreateRequest;
+import com.aytac.quickcommerceapi.dto.request.AttributeUpdateRequest;
 import com.aytac.quickcommerceapi.dto.response.ApiResponse;
 import com.aytac.quickcommerceapi.model.Attribute;
 import com.aytac.quickcommerceapi.service.AttributeService;
@@ -53,8 +54,8 @@ public class AttributeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<Attribute>> updateAttribute(@PathVariable Long id, @RequestBody String title) {
-        Attribute attribute = attributeService.updateAttribute(id, title);
+    public ResponseEntity<ApiResponse<Attribute>> updateAttribute(@PathVariable Long id, @RequestBody AttributeUpdateRequest request) {
+        Attribute attribute = attributeService.updateAttribute(id, request);
         if (attribute != null) {
             return new ResponseEntity<>(
                     new ApiResponse<>(true, attribute, null), HttpStatus.OK);
