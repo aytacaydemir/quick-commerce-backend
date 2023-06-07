@@ -17,6 +17,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String shortTitle;
     String title;
     String altText;
     String imageData; //temp

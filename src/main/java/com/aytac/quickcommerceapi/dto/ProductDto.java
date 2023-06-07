@@ -1,10 +1,9 @@
-package com.aytac.quickcommerceapi.dto.response;
+package com.aytac.quickcommerceapi.dto;
 
-import com.aytac.quickcommerceapi.dto.ProductAttributeDto;
 import java.math.BigDecimal;
 import java.util.List;
 
-public record ProductResponse(
+public record ProductDto(
         Long id,
         String title,
         String altText,

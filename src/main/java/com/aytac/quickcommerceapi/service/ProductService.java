@@ -2,7 +2,7 @@ package com.aytac.quickcommerceapi.service;
 
 import com.aytac.quickcommerceapi.dto.converter.ProductResponseConverter;
 import com.aytac.quickcommerceapi.dto.request.ProductCreateRequest;
-import com.aytac.quickcommerceapi.dto.response.ProductResponse;
+import com.aytac.quickcommerceapi.dto.ProductDto;
 import com.aytac.quickcommerceapi.model.Product;
 import com.aytac.quickcommerceapi.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -28,15 +28,16 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public ProductResponse getProductById(Long id) {
+    public ProductDto getProductById(Long id) {
         Optional<Product> product = productRepository.findById(id);
 
         return product.map(converter::convert).orElse(null); //ex
     }
 
-    public ProductResponse createProduct(ProductCreateRequest request, Long subcategoryId) {
+    public ProductDto createProduct(ProductCreateRequest request, Long subcategoryId) {
         Product product = new Product();
         product.setTitle(request.title());
+        product.setShortTitle(request.shortTitle());
         product.setAltText(request.altText());
         product.setImageData(request.imageData());
         product.setPrice(request.price());

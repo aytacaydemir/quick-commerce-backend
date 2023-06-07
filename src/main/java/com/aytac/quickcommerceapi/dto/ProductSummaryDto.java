@@ -1,9 +1,9 @@
-package com.aytac.quickcommerceapi.dto.request;
+package com.aytac.quickcommerceapi.dto;
 
 import java.math.BigDecimal;
 
-public record ProductCreateRequest(
-        String title,
+public record ProductSummaryDto(
+        Long id,
         String shortTitle,
         String altText,
         String imageData,
