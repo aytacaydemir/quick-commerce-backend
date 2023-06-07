@@ -50,6 +50,10 @@ public class CategoryService {
         return category.map(converter::convert).orElse(null);
     }
 
+    public Optional<Category> findCategoryById(Long id) {
+        return categoryRepository.findById(id);
+    }
+
     public CategoryResponse createCategory(CategoryCreateRequest request) {
         Category category = new Category();
         category.setTitle(request.title());
