@@ -1,6 +1,7 @@
 package com.aytac.quickcommerceapi.service;
 
 import com.aytac.quickcommerceapi.dto.request.AttributeCreateRequest;
+import com.aytac.quickcommerceapi.dto.request.AttributeUpdateRequest;
 import com.aytac.quickcommerceapi.model.Attribute;
 import com.aytac.quickcommerceapi.repository.AttributeRepository;
 import org.springframework.stereotype.Service;
@@ -42,12 +43,13 @@ public class AttributeService {
         }
     }
 
-    public Attribute updateAttribute(Long id, String title) {
+    public Attribute updateAttribute(Long id, AttributeUpdateRequest request) {
         Optional<Attribute> attribute = attributeRepository.findById(id);
 
         if (attribute.isPresent()) {
             Attribute toUpdate = attribute.get();
-            toUpdate.setTitle(title);
+            toUpdate.setTitle(request.title());
+            attributeRepository.save(toUpdate);
             return toUpdate;
         } else {
             return null;
