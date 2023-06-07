@@ -29,6 +29,4 @@ public class Product {
     @JoinColumn(name = "subcategory_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     Subcategory subcategory;
-
-
 }
