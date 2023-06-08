@@ -4,6 +4,7 @@ import com.aytac.quickcommerceapi.dto.CategoryDto;
 import com.aytac.quickcommerceapi.dto.CategorySubcategoryDto;
 import com.aytac.quickcommerceapi.dto.CategorySubcategoryProductDto;
 import com.aytac.quickcommerceapi.dto.converter.CategoryDtoConverter;
+import com.aytac.quickcommerceapi.exception.CategoryNotFoundException;
 import com.aytac.quickcommerceapi.model.Category;
 import com.aytac.quickcommerceapi.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,8 @@ public class CategoryService {
         Category category;
         if (categoryId.isPresent()) {
             category = categoryRepository.findById(categoryId.get())
-                    .orElse(null); //exception
+                    .orElseThrow(
+                            () -> new CategoryNotFoundException("Category not found by id=" + categoryId)); //exception
         } else {
             category = categoryRepository.findAll().stream().findFirst().get();
         }
