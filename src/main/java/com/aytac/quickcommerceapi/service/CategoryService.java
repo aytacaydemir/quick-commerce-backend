@@ -10,7 +10,6 @@ import com.aytac.quickcommerceapi.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,22 +28,14 @@ public class CategoryService {
     }
 
     public List<CategorySubcategoryDto> getAllCategoriesWithSubcategories() {
-        return categoryRepository.findAll()
-                .stream()
-                .map(converter::convertToCategorySubcategoryDto)
-                .collect(Collectors.toList());
+        return categoryRepository.findAll().stream()
+                .map(converter::convertToCategorySubcategoryDto).collect(Collectors.toList());
     }
 
-    public CategorySubcategoryProductDto getCategoryWithSubcategoriesAndProduct(Optional<Long> categoryId) {
+    public CategorySubcategoryProductDto getCategoryWithSubcategoriesAndProduct(Long categoryId) {
 
-        Category category;
-        if (categoryId.isPresent()) {
-            category = categoryRepository.findById(categoryId.get())
-                    .orElseThrow(
-                            () -> new CategoryNotFoundException("Category not found by id=" + categoryId)); //exception
-        } else {
-            category = categoryRepository.findAll().stream().findFirst().get();
-        }
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found by id=" + categoryId));
         return converter.convertToCategorySubcategoryProductDto(category);
     }
 }
