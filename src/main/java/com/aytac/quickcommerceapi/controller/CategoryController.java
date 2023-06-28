@@ -4,14 +4,14 @@ import com.aytac.quickcommerceapi.dto.CategoryDto;
 import com.aytac.quickcommerceapi.dto.CategorySubcategoryDto;
 import com.aytac.quickcommerceapi.dto.CategorySubcategoryProductDto;
 import com.aytac.quickcommerceapi.service.CategoryService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,19 +20,22 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @Operation(summary = "Get all categories")
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    @GetMapping("/categories/subcategories")
+    @Operation(summary = "Get all categories with subcategories without products")
+    @GetMapping("/subcategories")
     public ResponseEntity<List<CategorySubcategoryDto>> getAllCategoriesWithSubcategories() {
         return ResponseEntity.ok(categoryService.getAllCategoriesWithSubcategories());
     }
 
-    @GetMapping(value = {"/categories", "/categories/{categoryId}"})
+    @Operation(summary = "Get all products associated with a particular category.")
+    @GetMapping(value = {"/{categoryId}/products"})
     public ResponseEntity<CategorySubcategoryProductDto> getCategoryWithSubcategoriesAndProducts
-            (@PathVariable(required = false) Optional<Long> categoryId) {
+            (@PathVariable Long categoryId) {
 
         return ResponseEntity.ok(categoryService.getCategoryWithSubcategoriesAndProduct(categoryId));
     }
