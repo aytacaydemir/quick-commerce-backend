@@ -9,8 +9,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {CategoryNotFoundException.class, ProductNotFoundException.class})
-    public ResponseEntity<?> notFoundExceptionHandler(RuntimeException ex){
+    @ExceptionHandler(value =
+            {CategoryNotFoundException.class, ProductNotFoundException.class, SubcategoryNotFoundException.class})
+    public ResponseEntity<?> notFoundExceptionHandler(RuntimeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
