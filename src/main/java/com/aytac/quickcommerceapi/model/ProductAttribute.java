@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "procuct_attribute")
+@Table(name = "product_attribute")
 @Data
 public class ProductAttribute {
 
@@ -14,6 +14,7 @@ public class ProductAttribute {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(columnDefinition = "TEXT")
     String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,7 +22,7 @@ public class ProductAttribute {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Product product;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "attribute_id", nullable = false)
     Attribute attribute;
 
