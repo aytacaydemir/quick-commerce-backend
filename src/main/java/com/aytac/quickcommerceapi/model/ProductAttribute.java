@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "product_attribute")
+//@Table(name = "product_attribute", uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "attribute_id"}))
 @Data
 public class ProductAttribute {
 
