@@ -26,6 +26,11 @@ public class ProductService {
         this.subcategoryService = subcategoryService;
     }
 
+    public Product findProductById(Long productId) {
+        return productRepository.findById(productId).orElseThrow(
+                () -> new ProductNotFoundException("Product not found by id= " + productId));
+    }
+
     public ProductDto getProductById(Long productId) {
 
         Optional<Product> product = productRepository.findById(productId);
