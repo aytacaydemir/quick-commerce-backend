@@ -1,6 +1,6 @@
 package com.aytac.quickcommerceapi.service;
 
-import com.aytac.quickcommerceapi.exception.SubcategoryNotFoundException;
+import com.aytac.quickcommerceapi.exception.custom.SubcategoryNotFoundException;
 import com.aytac.quickcommerceapi.model.Subcategory;
 import com.aytac.quickcommerceapi.repository.SubcategoryRepository;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package com.aytac.quickcommerceapi.service;
 import com.aytac.quickcommerceapi.dto.ProductAttributeDto;
 import com.aytac.quickcommerceapi.dto.converter.ProductAttributeDtoConverter;
 import com.aytac.quickcommerceapi.dto.request.ProductAttributeCreateRequest;
-import com.aytac.quickcommerceapi.exception.AttributeAlreadyExistException;
+import com.aytac.quickcommerceapi.exception.custom.AttributeAlreadyExistException;
 import com.aytac.quickcommerceapi.model.Attribute;
 import com.aytac.quickcommerceapi.model.Product;
 import com.aytac.quickcommerceapi.model.ProductAttribute;

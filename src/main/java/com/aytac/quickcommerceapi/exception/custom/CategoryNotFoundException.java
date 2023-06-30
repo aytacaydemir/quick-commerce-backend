@@ -1,4 +1,4 @@
-package com.aytac.quickcommerceapi.exception;
+package com.aytac.quickcommerceapi.exception.custom;
 
 public class CategoryNotFoundException extends RuntimeException {
 

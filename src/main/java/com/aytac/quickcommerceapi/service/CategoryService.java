@@ -4,7 +4,7 @@ import com.aytac.quickcommerceapi.dto.CategoryDto;
 import com.aytac.quickcommerceapi.dto.CategorySubcategoryDto;
 import com.aytac.quickcommerceapi.dto.CategorySubcategoryProductDto;
 import com.aytac.quickcommerceapi.dto.converter.CategoryDtoConverter;
-import com.aytac.quickcommerceapi.exception.CategoryNotFoundException;
+import com.aytac.quickcommerceapi.exception.custom.CategoryNotFoundException;
 import com.aytac.quickcommerceapi.model.Category;
 import com.aytac.quickcommerceapi.repository.CategoryRepository;
 import org.springframework.stereotype.Service;

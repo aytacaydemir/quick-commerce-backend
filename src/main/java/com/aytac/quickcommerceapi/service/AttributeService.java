@@ -1,6 +1,6 @@
 package com.aytac.quickcommerceapi.service;
 
-import com.aytac.quickcommerceapi.exception.AttributeNotFoundException;
+import com.aytac.quickcommerceapi.exception.custom.AttributeNotFoundException;
 import com.aytac.quickcommerceapi.model.Attribute;
 import com.aytac.quickcommerceapi.repository.AttributeRepository;
 import org.springframework.stereotype.Service;
