@@ -23,11 +23,14 @@ The project utilizes the following technologies and frameworks:
 - Programming Language: [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - Web Framework: [Spring Boot 3.1.0](https://spring.io/blog/2023/05/18/spring-boot-3-1-0-available-now)
 - Database: [Postgresql](https://www.postgresql.org/)
-- Deployment: [In progress] :hammer:
+- Cloud: AWS RDS & Elastic Beanstalk
+- Deployment: [API Documentation ](http://quick-commerce-api.us-east-1.elasticbeanstalk.com:5000/swagger-ui/index.html#)
 
 ## Getting Started
 
-- Deployment instructions, Getting Started guide, Documentation, and Contributing steps will be provided after completing the first phase of the project.
+- You can access the API Documentation and Database, which are deployed on AWS, from the following link: [API Documentation ](http://quick-commerce-api.us-east-1.elasticbeanstalk.com:5000/swagger-ui/index.html#)
+
+- Deployment instructions, Getting Started guide, Documentation, and Contributing steps will be shared in more detail after completing the first phase of the project.
 - If you like the content of the project until then, you can review source codes.
 
 ## Documentation
